@@ -5,40 +5,44 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lasalced <lasalced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/24 11:35:44 by lasalced          #+#    #+#             */
-/*   Updated: 2014/11/24 13:58:08 by lasalced         ###   ########.fr       */
+/*   Created: 2014/11/28 10:39:50 by lasalced          #+#    #+#             */
+/*   Updated: 2014/12/01 14:37:39 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#define BUFF_SIZE
+#include <stdlib.h>
+#include <unistd.h>
 
-int			get_next_line(int const fd, char **line)
+int			ft_read(const int fd, char *buf, char **line)
 {
 	int		ret;
-	char	*str;
-	char	*tmp;
-	char	buf[BUFF_SIZE + 1];
+	static char	*str = 0;
 
-	if (!line || !*line || BUFF_SIZE <= 0 || fd == -1)
-		return (-1);
-	if (tmp)
-		str = ft_strdup(tmp);
-	while (!ft_strchr(str, '\n'))
+	ret = 1;
+	while (!(ft_strchr(str, '\n')) && (ret = read(fd, buf, BUFF_SIZE)))
 	{
-		while (ret = read(fd, buf, BUFF_SIZE))
-		{
 			buf[ret] = 0;
-			str = ft_strjoin(str, but);
-		}
-		*line = ft_strsub(str, 0, ft_strchr(str, '\n') - str + 1);
+			str = ft_strjoin(str, buf);
 	}
-	line[0][ft_strlen(*line) - 1] = 0;
-	mem = ft_strsub(str, ft_strchr(str, '\n') - str + 1, \
-			ft_strlen(ft_strchr(str, '\n')));
-	free(str);
-	if (ret == 0);
+	if (ft_strchr(str, '\n') && || (*line == ft_strdup(str)))
+		*line = ft_strsub(str, 0, ft_strchr(str, '\n') - str + 1);
+	if (ret)
+		line[0][ft_strlen(*line) - 1] = 0;
+	str = ft_strsub(str, ft_strchr(str, '\n') - str + 1, \
+		   ft_strlen(ft_strchr(str, '\n')));
+	free (str);
+	if (ret == 0)
 		return (0);
 	else
 		return (1);
+}
+
+int				get_next_line(int const fd, char **line)
+{
+	char		buf[BUFF_SIZE + 1];
+
+	if (!line || BUFF_SIZE <= 0)
+		return (-1);
+	return (ft_read(fd, buf, line));
 }
