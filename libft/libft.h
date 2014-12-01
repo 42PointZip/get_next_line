@@ -6,13 +6,13 @@
 /*   By: lasalced <lasalced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 11:45:11 by lasalced          #+#    #+#             */
-/*   Updated: 2014/11/22 13:08:34 by lasalced         ###   ########.fr       */
+/*   Updated: 2014/12/01 13:20:55 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# define BUFF_SIZE 32
+# define BUFF_SIZE 1
 # include <string.h>
 
 int		ft_isalpha(int c);
