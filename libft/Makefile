@@ -6,7 +6,7 @@
 #    By: lasalced <lasalced@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/14 11:47:42 by lasalced          #+#    #+#              #
-#*   Updated: 2014/12/01 12:24:04 by                  ###   ########.fr       *#
+#*   Updated: 2014/12/11 11:48:32 by                  ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,6 @@ SRC		= ft_toupper.c ft_tolower.c ft_strstr.c ft_itoa.c \
 		  ft_isdigit.c ft_isascii.c ft_isalpha.c ft_isalnum.c ft_bzero.c \
 		  ft_atoi.c ft_striteri.c ft_strmap.c ft_strmapi.c ft_strequ.c \
 		  ft_strnequ.c ft_strsub.c ft_strjoin.c ft_strtrim.c ft_strsplit.c \
-		  get_next_line.c
 		   
 OBJ		= $(SRC:.c=.o)
 CC		= gcc
@@ -45,24 +44,3 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-
-other: re $(NAME)
-	@$(CC) -I . -g $(NAME) main2.c
-	@./a.out
-
-testall: test1 test2
-
-test1: re $(NAME)
-	@$(CC) -I . $(NAME) main.c
-	@./a.out
-	@rm a.out
-
-test2: re 
-	@curl -s http://pastebin.com/raw.php?i=ykKyqX78 > main.c
-	@$(CC) $(FLAGS) -I . $(NAME) main.c
-	@rm main.c
-	@./a.out
-	@rm a.out
-
-re: fclean all
-
