@@ -3,27 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lasalced <lasalced@student.42.fr>          +#+  +:+       +#+        */
+/*   By:  <>                                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/28 10:39:50 by lasalced          #+#    #+#             */
-/*   Updated: 2015/05/25 08:52:14 by                  ###   ########.fr       */
+/*   Created: 2015/05/25 09:08:46 by                   #+#    #+#             */
+/*   Updated: 2015/05/25 09:22:39 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+nclude "libft.h"
 #include <stdlib.h>
 #include <unistd.h>
+#include "get_next_line.h"
 
-int			ft_read(const int fd, char *buf, char **line)
+
+int				ft_read(const int fd, char *buf, char **line)
 {
-	int		ret;
-	static char	*str = 0;
+	int			ret;
+	static char	*str;
 
+	if (!str)
+		str = ft_strnew(0);
 	while (!(ft_strchr(str, '\n')) && (ret = read(fd, buf, BUFF_SIZE)))
-	{	
+	{
 		if (ret == -1)
 			return (-1);
-		buf[ret] = '\0';
+		buf[ret] = 0;
 		str = ft_strjoin(str, buf);
 	}
 	if (ft_strchr(str, '\n'))
@@ -31,9 +35,9 @@ int			ft_read(const int fd, char *buf, char **line)
 	else
 		*line = ft_strdup(str);
 	if (ret)
-		line[0][ft_strlen(*line ) - 1] = 0;
+		line[0][ft_strlen(*line) - 1] = 0;
 	str = ft_strsub(str, ft_strchr(str, '\n') - str + 1, \
-		   ft_strlen(ft_strchr(str, '\n')));
+			ft_strlen(ft_strchr(str, '\n')));
 	if (ret == 0)
 		return (0);
 	else
