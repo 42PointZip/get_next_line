@@ -6,7 +6,7 @@
 /*   By: lasalced <lasalced@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/28 10:39:50 by lasalced          #+#    #+#             */
-/*   Updated: 2014/12/07 12:32:14 by                  ###   ########.fr       */
+/*   Updated: 2015/05/25 08:52:14 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ int			ft_read(const int fd, char *buf, char **line)
 		buf[ret] = '\0';
 		str = ft_strjoin(str, buf);
 	}
-	if (ft_strchr(str, '\n')  || ((*line == ft_strdup(str)) && 0))
+	if (ft_strchr(str, '\n'))
 		*line = ft_strsub(str, 0, ft_strchr(str, '\n') - str + 1);
+	else
+		*line = ft_strdup(str);
 	if (ret)
 		line[0][ft_strlen(*line ) - 1] = 0;
 	str = ft_strsub(str, ft_strchr(str, '\n') - str + 1, \
